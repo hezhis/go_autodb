@@ -114,17 +114,13 @@ func (st *Table) Build() error {
 		return err
 	}
 	if !flag {
-		st.create()
-	} else {
-		if err := st.change(); nil != err {
-			return err
-		}
+		return st.create()
 	}
-	return nil
+	return st.change()
 }
 
-func (st *Table) create() {
-	execSQL(st.createTableSQL(), true)
+func (st *Table) create() error {
+	return execSQL(st.createTableSQL(), true)
 }
 
 func (st *Table) change() error {
