@@ -1,9 +1,8 @@
 package go_autodb
 
 import (
-	"log"
-
 	"github.com/hezhis/go_autodb/db"
+	logger "github.com/hezhis/go_log"
 )
 
 func BuildTables() error {
@@ -27,7 +26,7 @@ func execSQL(sql string, echo bool) error {
 		return nil
 	}
 	if echo {
-		log.Printf("%s\n", sql)
+		logger.Info("%s\n", sql)
 	}
 	_, err := db.OrmEngine.Exec(sql)
 	return err

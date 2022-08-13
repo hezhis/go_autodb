@@ -5,10 +5,10 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"strings"
 
 	"github.com/hezhis/go_autodb/column"
+	logger "github.com/hezhis/go_log"
 )
 
 var (
@@ -38,12 +38,12 @@ type (
 func loadTableConf(file string) bool {
 	data, err := ioutil.ReadFile(file)
 	if nil != err {
-		log.Printf("load table conf error! [%s] %s\n", file, err)
+		logger.Error("load table conf error! [%s] %s\n", file, err)
 		return false
 	}
 
 	if err = json.Unmarshal(data, Tables); err != nil {
-		log.Fatalf("load %s Unmarshal json error:%s", file, err)
+		logger.Fatal("load %s Unmarshal json error:%s", file, err)
 		return false
 	}
 	return true

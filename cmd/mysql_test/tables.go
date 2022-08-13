@@ -5,25 +5,27 @@ import "github.com/hezhis/go_autodb"
 func init() {
 	go_autodb.Tables = []*go_autodb.TableConf{
 		{
-			Name:    "account",
-			Comment: "账号表",
+			Name:    "charge",
+			Comment: "充值订单表",
 			Columns: []*go_autodb.ColumnConf{
-				{Name: "user_id", Type: "int", Comment: "用户唯一ID", Unsigned: true},
-				{Name: "account_name", Type: "varchar", Comment: "用户帐户的字符串", Size: 64},
-				{Name: "passwd", Type: "varchar", Comment: "玩家的密码", Size: 32},
+				{Name: "id", Type: "bigint", Comment: "自增id", Unsigned: true, AutoIncrement: true},
+				{Name: "pf_id", Type: "int", Comment: "平台id", Unsigned: true},
+				{Name: "srv_id", Type: "int", Comment: "服务器id", Unsigned: true},
+				{Name: "account_id", Type: "bigint", Comment: "账号id", Unsigned: true},
+				{Name: "actor_id", Type: "bigint", Comment: "角色id", Unsigned: true},
+				{Name: "charge_id", Type: "int", Comment: "充值表id", Unsigned: true},
+				{Name: "cash_num", Type: "int", Comment: "钱币数量", Unsigned: true},
+				{Name: "count", Type: "int", Comment: "购买数量", Unsigned: true},
+				{Name: "check_time", Type: "int", Comment: "服务器id", Unsigned: true},
+				{Name: "insert_time", Type: "int", Comment: "服务器id", Unsigned: true},
+				{Name: "pay_no", Type: "varchar", Size: 64, Comment: "渠道订单号"},
+				{Name: "cp_no", Type: "int", Size: 64, Comment: "我们订单号"},
 			},
 			Keys: []*go_autodb.TableKey{
-				{Type: "pri", Name: "user_id"},
-				{Type: "uni", Name: "account_name"},
-			},
-		},
-		{
-			Name:    "constvariables",
-			Comment: "常量表",
-			Columns: []*go_autodb.ColumnConf{
-				{Name: "actorid_series_bits", Type: "int", Comment: "玩家序列号所占bits，需要同时修改以下掩码"},
-				{Name: "actorid_series_mask", Type: "bigint", Comment: "玩家序列号掩码"},
-				{Name: "actor_mail_max", Type: "int", Comment: "玩家邮件数量达到最大值后开始替换旧邮件"},
+				{Type: "pri", Name: "pri", ColumnVec: []string{"id"}},
+				{Type: "mul", Name: "pf_id", ColumnVec: []string{"pf_id"}},
+				{Type: "mul", Name: "srv_id", ColumnVec: []string{"srv_id"}},
+				{Type: "mul", Name: "pf_srv_id", ColumnVec: []string{"pf_id", "srv_id"}},
 			},
 		},
 	}
