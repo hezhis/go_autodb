@@ -2,7 +2,7 @@ package column
 
 const (
 	NO  = ""
-	MUL = "MUL"
-	UNI = "UNI"
-	PRI = "PRI"
+	MUL = "mul"
+	UNI = "uni"
+	PRI = "pri"
 )
