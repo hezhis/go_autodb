@@ -54,7 +54,7 @@ func (key *TableKey) createKeySQL() string {
 	if size <= 0 {
 		return ""
 	}
-	switch key.Type {
+	switch strings.ToUpper(key.Type) {
 	case column.PRI:
 		return key.createPriKeySQL()
 	case column.UNI:
